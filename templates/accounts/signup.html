@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+User Auth | eFarm
+{% endblock %}
+
+{% block title %}
+User Auth | eFarm
+{% endblock %}
+
+{% block content %}
+<form class="auth-container" method="post">{% csrf_token %}
+  {% for f in form %}
+  <div class="auth-form">
+    <span class="auth-label">{{ f.label }} :</span>
+    <span class="auth-content">{{ f }}</span>
+  </div>
+  {% endfor %}
+  <input class="auth-input" type="submit" value="Save" />
+</form>
+{% endblock %}
+

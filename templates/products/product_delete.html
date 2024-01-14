@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+Product Delete | eFarm
+{% endblock %}
+
+{% block title %}
+Product Delete | eFarm
+{% endblock %}
+
+{% block content %}
+<form class="delete-form" method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to delete "{{ product.name }}"?</p>
+  <input type="submit" value="Confirm" />
+</form>
+{% endblock %}

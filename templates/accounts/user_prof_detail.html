@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{% if user == profile.user %}
+  MyPage | eFarm
+{% endif %}
+{% if not user == profile.user %}
+  Farmer Page | eFarm
+{% endif %}
+{% endblock %}
+
+{% block title %}
+{% if user == profile.user %}
+  MyPage | eFarm
+{% endif %}
+{% if not user == profile.user %}
+  Farmer Page | eFarm
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+  {% if user == profile.user %}
+  <span>氏名 : {{ profile.last_name }} {{ profile.first_name }}</span>
+  <span>生年月日 : {{ profile.date_of_birth }}</span>
+  <span>住所 : {{ profile.address }}</span>
+  <span>email : {{ profile.user.email }}</span>
+  <span>tel : {{ profile.phone }}</span>
+    {% if user.is_seller %}
+    <span>法人名 : {{ profile.farm_name }}</span>
+    {% endif %}
+  <div class="profile-edit-link">
+    {% if user.is_buyer %}
+    <a href="{% url 'accounts:buyer_update' user.id %}">Edit Profile</a>
+    <a href="{% url 'payments:payment_list' %}">Payment List</a>
+    {% endif %}
+    {% if user.is_seller %}
+    <a href="{% url 'accounts:seller_update' user.id %}">Edit Profile</a>
+    {% endif %}
+    <a href="{% url 'accounts:password_change' %}">Change Password</a>
+  </div>
+  {% endif %}
+  {% if not user == profile.user %}
+  <span>法人名 : {{ profile.farm_name }}</span>
+  <span>住所 : {{ profile.address }}</span>
+  <span>email : {{ profile.user.email }}</span>
+  <span>tel : {{ profile.phone }}</span>
+  {% endif %}
+
+  {% comment %}
+  {% endif %}
+  {% if user.is_seller %}
+  <span>法人名 : {{ profile.farm_name }}</span>
+  {% endif %}
+  {% if user == profile.user %}
+  <span>氏名 : {{ profile.last_name }} {{ profile.first_name }}</span>
+  <span>生年月日 : {{ profile.date_of_birth }}</span>
+  {% endif %}
+  <div class="profile-edit-link">
+    {% if user == profile.user %}
+      {% if user.is_buyer %}
+      <a href="{% url 'accounts:buyer_update' user.id %}">Edit Profile</a>
+      <a href="{% url 'payments:payment_list' %}">Payment List</a>
+      {% endif %}
+      {% if user.is_seller%}
+      <a href="{% url 'accounts:seller_update' user.id %}">Edit Profile</a>
+      {% endif %}
+      <a href="{% url 'accounts:password_change' %}">Change Password</a>
+    {% endif %}
+  </div>
+  {% endcomment %}
+</div>
+{% endblock %}

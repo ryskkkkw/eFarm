@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+SignUp Index | eFarm
+{% endblock %}
+
+{% block title %}
+SignUp Index | eFarm
+{% endblock %}
+
+{% block content %}
+<ul class="auth-container liststyle">
+  <li>
+    <a href="{% url 'accounts:signup' roll='buyer' %}">SignUp Buyer</a>
+  </li>
+  <li>
+    <a href="{% url 'accounts:signup' roll='seller' %}">SignUp Seller</a>
+  </li>
+  <li><a href="{% url 'accounts:login' %}">Login</a></li>
+</ul>
+{% endblock %}

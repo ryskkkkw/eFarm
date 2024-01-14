@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}
+Cart Detail | eFarm
+{% endblock %}
+
+{% block title %}
+Cart Detail | eFarm
+{% endblock %}
+
+{% block content %}
+{% if cartitems %}
+{% for item in cartitems %}
+<div class="cart-item">
+  <span class="item-name">
+    <a href="{% url 'products:product_detail' item.product.id %}">{{ item.product.name }}
+    </a>
+  </span>
+  <div class="item-amount-price-link">
+    <span class="item-amount">{{ item.amount }}個</span>
+    <span class="item-price">{{ item.price }}円</span>
+    <a href="{% url 'carts:cart_update' item.id item.cart_id %}">Edit</a>
+    <a href="{% url 'carts:cart_delete' item.id item.cart_id %}">Delete</a>
+  </div>
+</div>
+{% endfor %}
+<form class="payment-form" action="{% url 'payments:create_checkout_session' %}" method="POST">
+  {% csrf_token %}
+  <button type="submit">Checkout</button>
+</form>
+{% elif not cartitems %}
+<p class="cart-no-item">No Items in Cart!</p>
+{% endif %}
+{% endblock %}

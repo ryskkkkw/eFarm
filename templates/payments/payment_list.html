@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+Payment List | eFarm
+{% endblock %}
+
+{% block title %}
+Payment List | eFarm
+{% endblock %}
+
+{% block content %}
+{% for payment in payments %}
+{% for first_item in payment|slice:'1' %}
+<div class="payment">
+  <span class="payment-date">{{ first_item.payment.created_at|date:'Y年n月j日' }}</span>
+  {% for item in payment %}
+  <div class="payment-item">
+      <span>商品：{{ item.product }}</span>
+      <span>単価：{{ item.unit_price }}</span>
+      <span>個数：{{ item.amount }}</span>
+      <span>小計：¥{{ item.total_price }}</span>
+  </div>
+  {% endfor %}
+  <span class="payemnt-price">合計：¥{{ first_item.payment.price }}</span>
+{% endfor %}
+</div>
+{% endfor %}
+{% endblock %}

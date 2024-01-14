@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head_title%}
+Logout Done | eFarm
+{% endblock %}
+
+{% block title %}
+Logout Done | eFarm
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <span>Logout Done!</span>
+  <a href="{% url 'accounts:login' %}">Login</a>
+</div>
+{% endblock %}

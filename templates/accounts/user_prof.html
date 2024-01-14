@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{% if user.is_buyer %}
+Buyer Profile | eFarm
+{% elif user.is_seller %}
+Seller Profile | eFarm
+{% endif %}
+{% endblock %}
+
+{% block title %}
+{% if user.is_buyer %}
+Buyer Profile | eFarm
+{% elif user.is_seller %}
+Seller Profile | eFarm
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<form class="auth-container" method="post">{% csrf_token %}
+  {% for f in form %}
+  <div class="profile-form">
+    <span class="profile-label">{{ f.label }} :</span>
+    <span class="profile-content">{{ f }}</span>
+  </div>
+  {% endfor %}
+  <input class="login-input" type="submit" value="Save" />
+</form>
+{% endblock %}

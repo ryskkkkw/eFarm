@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+Product Detail | eFarm
+{% endblock %}
+
+{% block title %}
+Product Detail | eFarm
+{% endblock %}
+
+{% block content %}
+<div class="item-grid">
+  <div>
+  {% if product.image %}
+    <img class="item-detail-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+  {% endif %}
+  </div>
+  <div class="item-text">
+    <h2 class="item-title">{{ product.name }}</h2>
+    <p class="item-description">{{ product.description }}</p>
+    <div class="item-detail-info">
+      <span>{{ product.amount }}</span>
+      <span>¥{{ product.price_with_tax }}</span>
+    </div>
+    <span class="item-seller">生産者：<a href="{% url 'accounts:seller_detail' product.seller.user.id %}">{{ product.seller.farm_name }}</a></span>
+    {% if user.is_buyer %}
+    <form class="cart-form" action="{% url 'carts:cart_create' product.id %}" method="post">
+      {% csrf_token %}
+      <input type="number" name="amount" />
+      <input type="submit" value="Cart" />
+    </form>
+    {% endif %}
+    {% if user.is_seller %}
+    <div class="product-edit">
+      <a href="{% url 'products:product_update' product.id %}">EDIT</a>
+      <a href="{% url 'products:product_delete' product.id %}">DELETE</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

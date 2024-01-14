@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head_title%}
+Signup Done | eFarm
+{% endblock %}
+
+{% block title %}
+Signup Done | eFarm
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <span>Signup Done!</span>
+  <span>Welcome to eFarm!</span>
+  <a href="{% url 'accounts:login' %}">Let's login and make your profile!</a>
+</div>
+{% endblock %}
+
+

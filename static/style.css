@@ -1,0 +1,344 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1;
+  color: #495057;
+  position: relative;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 136rem;
+  padding: 3rem 4rem;
+  margin: 0 auto;
+}
+
+/* header section */
+
+.header {
+  background-color: white;
+  position: sticky;
+  top: 0%;
+}
+
+.title_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.title_nav h1 {
+  font-size: 2.5rem;
+}
+
+.nav {
+  display: flex;
+  font-size: 1.4rem;
+  gap: 2.2rem;
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #495057;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+  color: #69db7c;
+}
+
+.search {
+  display: flex;
+  width: 30%;
+}
+
+.search input {
+  height: 2.5rem;
+}
+
+.search input[type='search'] {
+  flex: 1 1 auto;
+}
+
+/* footer section */
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3rem;
+  padding-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.sns-list {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+
+.sns-link {
+  text-decoration: none;
+  color: currentColor;
+}
+
+/* main section */
+
+/* product list */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 30rem;
+  column-gap: 2rem;
+  row-gap: 4rem;
+  margin-bottom: 5rem;
+}
+
+.item-link {
+  text-decoration: none;
+  color: #555;
+}
+
+.item-img {
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+}
+
+.item-info {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 1.5rem;
+  padding-top: 1rem;
+}
+
+/* product detail */
+
+.item-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-auto-rows: 40rem;
+  gap: 5rem;
+  margin-bottom: 5rem;
+}
+
+.item-detail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-title {
+  margin-bottom: 3rem;
+  font-weight: 300;
+  font-size: 3rem;
+}
+
+.item-description {
+  margin-bottom: 3rem;
+  font-size: 2rem;
+}
+
+.item-detail-info {
+  display: flex;
+  gap: 4rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.item-seller {
+  display: inline-block;
+  font-size: 2rem;
+  margin-bottom: 5rem;
+}
+
+.cart-form {
+  display: flex;
+  padding-bottom: 4rem;
+}
+
+.cart-form input {
+  height: 2.5rem;
+}
+
+.cart-form input[type='number'] {
+  width: 8rem;
+}
+
+.cart-form input[type='submit'] {
+  width: 4rem;
+}
+
+/* product edit */
+
+.product-edit {
+  display: flex;
+  gap: 3rem;
+  font-size: 1.5rem;
+}
+
+.edit-form {
+  display: flex;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.edit-label {
+  width: 15%;
+}
+
+/* product delete */
+
+.delete-form {
+  font-size: 2rem;
+}
+
+.delete-form p {
+  margin-bottom: 5rem;
+}
+
+/* cart detail */
+
+.cart-item {
+  display: flex;
+  font-size: 2.5rem;
+  margin-bottom: 5rem;
+}
+
+.cart-item a {
+  text-decoration: none;
+  color: #555;
+}
+
+.cart-item a:hover {
+  text-decoration: none;
+  color: #69db7c;
+}
+
+.item-name {
+  width: 30%;
+}
+
+.item-amount-price-link {
+  display: flex;
+  gap: 5rem;
+}
+
+.payment-form button {
+  padding: 0.5rem;
+}
+
+.cart-no-item {
+  font-size: 5rem;
+}
+
+.cart-edit {
+  font-size: 2rem;
+}
+
+.cart-edit input {
+  display: inline-block;
+  height: 3rem;
+  font-size: 2rem;
+}
+
+.cart-edit input[type='number']{
+  width: 10rem;
+}
+
+/* User Auth and Profile */
+
+.auth-container,
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 3.5rem;
+  gap: 5rem;
+  align-items: center;
+}
+
+.liststyle {
+  list-style: none;
+}
+
+.auth-container a {
+  color: #495057;
+  border-bottom: #495057;
+}
+
+.auth-container a:hover {
+  color: #69db7c;
+}
+
+.auth-form,
+.login-form,
+.profile-form {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.auth-content input,
+.login-content input,
+.profile-content input {
+  font-size: 3rem;
+}
+
+.auth-input,
+.login-input,
+.profile-input {
+  font-size: 2.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.profile-edit-link {
+  display: flex;
+  gap: 4rem;
+}
+
+.profile-edit-link a {
+  color: #495057;
+}
+
+.profile-edit-link a:hover {
+  color: #69db7c;
+}
+
+.password-reset-link {
+  margin-top: 10rem;
+  font-size: 2rem;
+}
+
+/* payment list */
+
+.payment {
+  font-size: 2rem;
+  padding-bottom: 3rem;
+}
+
+.payment-date {
+  display: inline-block;
+  padding-bottom: 1rem;
+}
+
+.payment-item {
+  display: flex;
+  gap: 2rem;
+  padding-bottom: 1rem;
+}

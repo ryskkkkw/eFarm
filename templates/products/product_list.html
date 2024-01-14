@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+
+{% block head_title %}
+Products | eFarm
+{% endblock %}
+
+{% block title %}
+Products | eFarm
+{% endblock %}
+
+{% block search %}
+<form class="search" action="" method="get">
+  <input type="search" name="search" required />
+  <input type="submit" value="search" />
+</form>
+{% endblock %}
+
+{% block content %}
+{% if user.is_seller %}
+    <div class="product-edit">
+      <a href="{% url 'products:product_create' %}">Product Create</a>
+    </div>
+    {% endif %}
+<div class="products-grid">
+  {% for product in product_list %}
+  <div>
+    <a class="item-link" href="{% url 'products:product_detail' product.id %}">
+      {% if product.image %}
+      <img class="item-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+      {% endif %}
+      <div class="item-info">
+        <span>{{ product.name }}</span>
+        <span>{{ product.amount }}</span>
+        <span>¥{{ product.price_with_tax }}</span>
+        <span>{{ product.seller.farm_name }}</span>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

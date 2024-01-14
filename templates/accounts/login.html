@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+{% block head_title %}
+Login | eFarm
+{% endblock %}
+
+{% block title %}
+Login | eFarm
+{% endblock %}
+
+{% block content %}
+<form class="auth-container" method="post">{% csrf_token %}
+  {% for f in form %}
+  <div class="login-form">
+    <span class="login-label">{{ f.label }} :</span>
+    <span class="login-content">{{ f }}</span>
+  </div>
+  {% endfor %}
+  <input class="login-input" type="submit" value="Login" />
+</form>
+<div class="auth-container">
+  <a class="password-reset-link" href="{% url 'accounts:password_reset' %}">I forgot Password</a>
+</div>
+{% endblock %}

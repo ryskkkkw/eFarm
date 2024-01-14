@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+Item Edit | eFarm
+{% endblock %}
+
+{% block title %}
+Item Edit | eFarm
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <div class="cart-edit">
+    {{ form.errors }}
+    <span>Amount:</span>
+    <span>{{ form.amount }}</span>
+    <input type="submit" value="Update" />
+  </div>
+</form>
+{% endblock %}

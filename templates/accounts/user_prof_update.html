@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+Profile Edit | eFarm
+{% endblock %}
+
+{% block title %}
+Profile Edit | eFarm
+{% endblock %}
+
+{% block content %}
+<form class="auth-container" method="post">{% csrf_token %}
+  {% for f in form %}
+  <div class="profile-form">
+    <span class="profile-label">{{ f.label }} :</span>
+    <span class="profile-content">{{ f }}</span>
+  </div>
+  {% endfor %}
+  <input class="login-input" type="submit" value="Save" />
+</form>
+{% endblock %}
