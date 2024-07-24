@@ -85,3 +85,15 @@
         ├── test_payments.py
         └── test_products.py
 
+<br>
+
+# 3.各ディレクトリの詳細
+
+## accounts
+
+- ユーザーの認証に関する機能を持ったアプリケーションです。
+- モデルにはCustomUser,Buyer,Sellerの3つを実装しています。
+- CustomUserは全ユーザーの識別子としてのemailといくつかのフラグ属性を持ち、BuyerまたはSellerオブジェクトと1対1関係になっています。
+- 
+
+
