@@ -21,4 +21,67 @@
 
 プロジェクトディレクトリの主な構成は以下のとおりです。
 
-eFarm--
+
+    eFarm
+    ├── accounts
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── apps.py
+    │   ├── forms.py
+    │   ├── models.py
+    │   ├── urls.py
+    │   └── views.py
+    ├── carts
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── apps.py
+    │   ├── models.py
+    │   ├── tests.py
+    │   ├── urls.py
+    │   └── views.py
+    ├── config
+    │   ├── __init__.py
+    │   ├── asgi.py
+    │   ├── settings
+    │   │   ├── __init__.py
+    │   │   ├── base.py
+    │   │   └── production.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    ├── manage.py
+    ├── media
+    │   └── uploads
+    │       └── product_imgs
+    ├── payments
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── apps.py
+    │   ├── models.py
+    │   ├── tests.py
+    │   ├── urls.py
+    │   └── views.py
+    ├── products
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── apps.py
+    │   ├── models.py
+    │   ├── tests.py
+    │   ├── urls.py
+    │   └── views.py
+    ├── requirements.txt
+    ├── static
+    │   └── style.css
+    ├── templates
+    │   ├── accounts
+    │   ├── base.html
+    │   ├── carts
+    │   ├── payments
+    │   └── products
+    └── tests
+        ├── test1.jpg
+        ├── test2.jpg
+        ├── test_accounts.py
+        ├── test_carts.py
+        ├── test_payments.py
+        └── test_products.py
+
