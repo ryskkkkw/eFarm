@@ -90,10 +90,15 @@
 # 3.各ディレクトリの詳細
 
 ## accounts
-
 - ユーザーの認証に関する機能を持ったアプリケーションです。
-- モデルにはCustomUser,Buyer,Sellerの3つを実装しています。
-- CustomUserは全ユーザーの識別子としてのemailといくつかのフラグ属性を持ち、BuyerまたはSellerオブジェクトと1対1関係になっています。
-- 
+- CustomUser,Buyer,Sellerの3つのモデルを実装しています。
+- CustomUserは全ユーザーの識別子としてのemailといくつかのフラグのフィールドのみを持ち、その他のユーザー情報はBuyerまたはSellerモデルで登録します。CustomUserはBuyerまたはSellerオブジェクトと1対1関係になっています。
+<br>
 
+- ユーザー登録のフローは次のようになっています。
+  1. BuyerまたはSellerの登録リンクから始めにCustomUserの登録を行う。登録のurlパスにはそれぞれbuyerまたはsellerのrollパラメータが含まれている。
+  2. CustomUserのemail,passwordの登録をする際に、rollパラメータに基づきCustomUserのis_buyerまたはis_sellerのフラグをFalseからTrueにする。
+  3. CustomUserの登録が終わったら完了画面に遷移する。完了画面にはログインのリンクがある。
+  4. ログインの際に、CustomUserのis_profileフラグがFalseである場合、is_buyerがTrueであればBuyerの登録、is_sellerがTrueであればSellerの登録に遷移する。is_profileがTrue（BuyerまたはSellerも登録済）の場合は商品一覧画面に遷移する。
+  5. BuyerまたはSellerの登録と併せてis_profileフラグをTrueにしてから、登録した内容を表示するプロフィール画面に遷移する。
 
