@@ -100,5 +100,5 @@
   2. CustomUserのemail,passwordの登録をする際に、rollパラメータに基づきCustomUserのis_buyerまたはis_sellerのフラグをFalseからTrueにする。
   3. CustomUserの登録が終わったら完了画面に遷移する。完了画面にはログインのリンクがある。
   4. ログインの際に、CustomUserのis_profileフラグがFalseである場合、is_buyerがTrueであればBuyerの登録、is_sellerがTrueであればSellerの登録に遷移する。is_profileがTrue（BuyerまたはSellerも登録済）の場合は商品一覧画面に遷移する。
-  5. BuyerまたはSellerの登録と併せてis_profileフラグをTrueにしてから、登録した内容を表示するプロフィール画面に遷移する。
+  5. BuyerまたはSellerの登録の際に、is_profileフラグをTrueにしてから、登録した内容を表示するプロフィール画面に遷移する。
 
