@@ -100,7 +100,7 @@
   4. ログインの際に、CustomUserのis_profileフラグがFalseである場合、is_buyerがTrueであればBuyerの登録、is_sellerがTrueであればSellerの登録に遷移する。is_profileがTrue（BuyerまたはSellerが登録済）の場合は商品一覧画面に遷移する。
   5. BuyerまたはSellerの登録する際は、関連付けられているCustomUserのis_profileフラグをTrueにした上で、登録した内容を表示するプロフィール画面に遷移する。
 - パスワードの変更、リセットにはDjangoのPasswordChangeViewやPasswordResetViewなどをそのまま利用しています。
-- PasswordResetViewではメールが送信されるので、[mailtrap](https://mailtrap.io/ja/email-sandbox/)を利用してhtmlメールでのパスワードリセットのフローを確認しました。また、コンソールバックエンドを設定し、開発途中の確認として標準出力されるリンクからパスワードリセットを行う方法も試しています。
+- PasswordResetViewではメールが送信されるので、[Mailtrap](https://mailtrap.io/ja/email-sandbox/)を利用してhtmlメールでのパスワードリセットのフローを確認しました。また、コンソールバックエンドを設定し、開発途中の確認として標準出力されるリンクからパスワードリセットを行う方法も試しています。
 
 ## products
 - 商品の登録や表示、検索などを実行するアプリケーションです。
@@ -129,4 +129,23 @@
   3. カート登録のurlパスにはproduct_idのパラメータがあるため、そこから商品情報を取得する。また、カート登録のHttpRequestオブジェクトにあるamountキーから、購入個数を取得する。
   4. Cartに関連付けられているCartItemオブジェクトに同じ商品がある場合は購入個数と金額を更新する。同じ商品がない場合は新たにCartItemを作成する。
   5. CartやCartItemの登録が終わったら、カート詳細画面に遷移する。
-- カート詳細画面ではカートに入れた各商品の個数の更新やカートからの削除ができます。また、Checkoutボタンから決済手続きに進むことができます。
+- カート詳細画面ではカートに入れた各商品の個数の更新やカートからの削除ができます。また、Checkoutのurlから決済手続きに進むことができます。
+
+## payments
+- カートに入れた商品の決済や決済履歴の作成を行うアプリケーションです。
+- Payment,PaymentItemの2つのモデルを実装しています。
+- PaymentはBuyerオブジェクトと多対一関係、PaymentItemはPaymentオブジェクトと多対一関係になっています。
+- 決済処理には[Stripe](https://stripe.com/jp)を利用しています（テストモードで使っています）。
+- 決済のフローは次のようになっています。
+  1. カート詳細画面にあるCheckoutボタンを押下するとStripeの決済手続きに移行する。
+  2. 始めに決済手続きをするBuyerオブジェクトにpayment_idが登録されているか確認が行われる。過去に決済手続きをしたことがある場合は、payment_idが登録されているのでBuyerオブジェクトより取得する。
+  3. 決済手続きが初めての場合はpayment_idが登録されていないので、StripeAPIで顧客情報を作成する。顧客情報の作成にはBuyerオブジェクトの氏名や住所、メールアドレスなどを使用する。顧客情報を作成するとStripeの顧客idがレスポンスされるので、それをBuyerオブジェクトのpayment_idとして登録する。
+  4. StripeAPIのCheckoutセッションを作成する。Checkoutセッションのline_items属性に、辞書型にしたカート内の各商品をリストに入れて渡す。また、customer属性にはpayment_idを設定している。
+  5. Checkoutセッションで決済手続きが成功すると、決済完了画面に遷移する。
+- StripeのWebhookエンドポイントを登録しているため、決済完了画面の裏では決済履歴の作成が自動で実行されています。ここでPayment,PaymentItemオブジェクトが作成されます。決済履歴を作成するフローは次のようになっています。
+   1. 決済完了画面に遷移すると、同時にStripeのWebhookエンドポイントに登録したurlにリダイレクトされる。
+   2. リダイレクトにより、決済履歴を作成する関数のトリガーであるmy_webhook_view関数が実行される。
+   3. my_webhook_view関数では、Checkoutセッション完了後に作成されるイベントから決済情報を取得、決済履歴を作成するfulfill_order関数を実行し、取得した決済情報を渡す。
+   4. fulfill_order関数では、購入したBuyerに関連付けられるPaymentオブジェクトを作成する。Paymentオブジェクトには購入者の氏名や購入金額、配送住所などが登録される。Paymentオブジェクトが作成されたら、Buyerに関連付けられているCartオブジェクトが削除される。
+   5. 決済情報から購入した商品情報を取得し、forループで各商品のPaymentItemオブジェクトを作成することで、決済履歴（Paymentオブジェクトとそれに関連付けられるPaymentItemオブジェクト）が登録される。
+   6. 登録された決済履歴はBuyerのマイページにあるPaymentListから全て確認できる。
